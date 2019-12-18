@@ -8,22 +8,23 @@ USE company_DB;
 
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(45) NULL,
+  name VARCHAR(300) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(30) NULL,
-  salary DECIMAL(10,2) NULL,
-  department_id 
+  title VARCHAR(30) NOT NULL,
+  salary DECIMAL(10,2) NOT NULL,
+  department_id INT NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT,
-  flavor VARCHAR(45) NULL,
-  price DECIMAL(10,2) NULL,
-  quantity INT NULL,
+  first_name VARCHAR(75) NOT NULL,
+  last_name VARCHAR(75) NOT NULL,
+  role_id INT NOT NULL, 
+  manager_id INT,
   PRIMARY KEY (id)
 );
