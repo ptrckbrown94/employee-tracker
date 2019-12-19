@@ -90,7 +90,6 @@ app.post("/db/", function (req, res) { });
 
 
 
-
 function viewDepartment() {
     // select from the db
     const query = "SELECT * FROM department"
