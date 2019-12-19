@@ -53,10 +53,10 @@ function menu() {
                     viewDepartment();
                     break;
                 case "View roles":
-                    viewDepartment();
+                    viewRole();
                     break;
                 case "View employees":
-                    viewDepartment();
+                    viewEmployees();
                     break;
                 case "Update employee role":
                     viewDepartment();
@@ -79,7 +79,7 @@ function addDepartment() {
 
 function viewDepartment() {
     // select from the db
-    var query = "SELECT * FROM department"
+    const query = "SELECT * FROM department"
     connection.query(query, function (err, res) {
         if (err) throw err;
         console.table(res)
@@ -90,10 +90,31 @@ function viewDepartment() {
 
 }
 
+function viewRole() {
+    // select from the db
+    const query = "SELECT * FROM role"
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res)
+        menu()
 
+    })
+    // show the result to the user (console.table)
 
+}
 
+function viewEmployees() {
+    // select from the db
+    const query = "SELECT * FROM employee"
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res)
+        menu()
 
+    })
+    // show the result to the user (console.table)
+
+}
 
 
 function quit() {
