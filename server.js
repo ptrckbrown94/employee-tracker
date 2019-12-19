@@ -89,6 +89,48 @@ function addDepartment() {
 
 
 
+function addRole(){
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "what is the job title?",
+            name:"title"
+        },
+
+        {
+            type: "input",
+            message: "what is the employee salary?",
+            name:"salary"
+        },
+    
+
+        {
+            type: "input",
+            message: "what is the department ID?",
+            name:"departmentID"
+
+        }
+    ])
+    .then(function(res){
+        const title = res.title;
+        const salary = res.salary;
+        const departmentID = res.departmentID;
+        
+        const query =  `INSERT iNTO role (title, salary, deparment_id) VALUE (${title}, ${salary}, ${departmentID})`
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            console.table(res)
+            menu()
+
+        })
+    });
+
+
+
+}
+
+
+
 
 function viewDepartment() {
     // select from the db
@@ -149,7 +191,14 @@ function addEmployee() {
 
                 message: "What is the last name?",
                 name: "lastName"
-            })
+
+
+                
+            })  
+
+
+
+
                 .then(function (result) {
                     console.log("last name: " + result.lastName)
                     lastName = result.lastName;
@@ -164,13 +213,7 @@ function addEmployee() {
 
         });
 
-
-
-    // execute the sql (INSERT)
-
-
 }
-
 
 
 
