@@ -82,8 +82,8 @@ function addDepartment() {
             console.log("new department: " + result.department)
 
         });
-// execute the sql (INSERT)
-app.post("/db/", function (req, res) { });
+    // execute the sql (INSERT)
+    app.post("/db/", function (req, res) { });
 
 }
 
@@ -128,6 +128,50 @@ function viewEmployees() {
     // show the result to the user (console.table)
 
 }
+
+function addEmployee() {
+
+    let firstName = "";
+    let lastName = "";
+    let roleId = 0;
+    let managerId = 0;
+    // inquiere to get the inputs (name)
+    inquirer.prompt({
+
+        message: "What is the first name?",
+        name: "firstName"
+    })
+        .then(function (result) {
+            console.log("first name: " + result.firstName)
+            firstName = result.firstName;
+
+            inquirer.prompt({
+
+                message: "What is the last name?",
+                name: "lastName"
+            })
+                .then(function (result) {
+                    console.log("last name: " + result.lastName)
+                    lastName = result.lastName;
+                    const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE ('" +  firstName + "','" + lastName + "', 3, 2)"
+                    connection.query(query, function (err, res) {
+                        if (err) throw err;
+                        console.table(res)
+                        menu()
+
+                    })
+                });
+
+        });
+
+
+
+    // execute the sql (INSERT)
+
+
+}
+
+
 
 
 function quit() {
