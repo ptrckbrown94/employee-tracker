@@ -44,10 +44,10 @@ function menu() {
                     addDepartment();
                     break;
                 case "Add role":
-                    viewDepartment();
+                    addRole();
                     break;
                 case "Add employee":
-                    viewDepartment();
+                    addEmployee();
                     break;
                 case "View departments":
                     viewDepartment();
@@ -59,7 +59,7 @@ function menu() {
                     viewEmployees();
                     break;
                 case "Update employee role":
-                    viewDepartment();
+                    upDateEmployeeRole();
                     break;
                 default:
                     quit()
@@ -72,10 +72,24 @@ function menu() {
 }
 
 function addDepartment() {
- // inquiere to get the inputs (name)
- // execute the sql (INSERT)
+    // inquiere to get the inputs (name)
+    inquirer.prompt({
+
+        message: "What is the name of the department?",
+        name: "department"
+    })
+        .then(function (result) {
+            console.log("new department: " + result.department)
+
+        });
+// execute the sql (INSERT)
+app.post("/db/", function (req, res) { });
 
 }
+
+
+
+
 
 function viewDepartment() {
     // select from the db
