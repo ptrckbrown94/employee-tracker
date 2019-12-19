@@ -214,7 +214,22 @@ function viewEmployees() {
 
 function upDateEmployeeRole() {
     // update the employee role
+    connection.query("SELECT first_name, last_name, role_id  FROM employee", function (err, res) {
+        if (err) throw err;
+        console.table(res)
+        inquirer.prompt(
 
+            {
+                type: "input",
+                message: "which employee needs to be updated?",
+                name: "employee"
+
+            },
+
+
+        )
+
+    });
 
 }
 
