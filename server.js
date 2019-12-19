@@ -74,20 +74,23 @@ function menu() {
 function addDepartment() {
     // inquiere to get the inputs (name)
     inquirer.prompt({
-
+        type: "input",
         message: "What is the name of the department?",
         name: "department"
     })
-        .then(function (result) {
-            console.log("new department: " + result.department)
+     .then(function(res){
+        const department = res.department;
 
-        });
-    // execute the sql (INSERT)
-    app.post("/db/", function (req, res) { });
+        const query = `INSERT INTO department (name) VALUES("${department}")`
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            console.table(res)
+            menu()
 
+     })
+
+    });
 }
-
-
 
 function addRole(){
     inquirer.prompt([
@@ -115,8 +118,8 @@ function addRole(){
         const title = res.title;
         const salary = res.salary;
         const departmentID = res.departmentID;
-        
-        const query =  `INSERT iNTO role (title, salary, deparment_id) VALUE (${title}, ${salary}, ${departmentID})`
+
+        const query =  `INSERT iNTO role (title, salary, department_id) VALUE ("${title}", "${salary}", "${departmentID}")`
         connection.query(query, function (err, res) {
             if (err) throw err;
             console.table(res)
@@ -125,12 +128,53 @@ function addRole(){
         })
     });
 
-
-
 }
 
 
+function addEmployee() {
 
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "what the employee's first name?",
+            name:"firstName"
+        },
+
+        {
+            type: "input",
+            message: "what is the employee's last name?",
+            name:"lastName"
+        },
+    
+
+        {
+            type: "input",
+            message: "what is the employee's role ID?",
+            name:"departmentID"
+        },
+
+        {
+            type: "input",
+            message: "what is the employee's manager ID?",
+            name:"managerID"
+        }
+
+    ])
+    .then(function(res){
+        const firstName = res.firstName;
+        const lastName = res.lastName;
+        const departmentID = res.departmentID;
+        const managerID = res.managerID;
+        
+        const query =  `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE ("${firstName}", "${lastName}", "${departmentID}", "${managerID}")`
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+            console.table(res)
+            menu()
+        })
+    });
+
+}
 
 function viewDepartment() {
     // select from the db
@@ -170,52 +214,6 @@ function viewEmployees() {
     // show the result to the user (console.table)
 
 }
-
-function addEmployee() {
-
-    let firstName = "";
-    let lastName = "";
-    let roleId = 0;
-    let managerId = 0;
-    // inquiere to get the inputs (name)
-    inquirer.prompt({
-
-        message: "What is the first name?",
-        name: "firstName"
-    })
-        .then(function (result) {
-            console.log("first name: " + result.firstName)
-            firstName = result.firstName;
-
-            inquirer.prompt({
-
-                message: "What is the last name?",
-                name: "lastName"
-
-
-                
-            })  
-
-
-
-
-                .then(function (result) {
-                    console.log("last name: " + result.lastName)
-                    lastName = result.lastName;
-                    const query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE ('" +  firstName + "','" + lastName + "', 3, 2)"
-                    connection.query(query, function (err, res) {
-                        if (err) throw err;
-                        console.table(res)
-                        menu()
-
-                    })
-                });
-
-        });
-
-}
-
-
 
 function quit() {
 
