@@ -184,7 +184,6 @@ function viewDepartment() {
         if (err) throw err;
         console.table(res)
         menu()
-
     })
     // show the result to the user (console.table)
 }
@@ -196,7 +195,6 @@ function viewRole() {
         if (err) throw err;
         console.table(res)
         menu()
-
     })
     // show the result to the user (console.table)
 }
@@ -217,7 +215,7 @@ function upDateEmployeeRole() {
     connection.query("SELECT first_name, last_name, role_id  FROM employee", function (err, res) {
         if (err) throw err;
         console.table(res)
-        inquirer.prompt(
+        (
 
             {
                 type: "input",
